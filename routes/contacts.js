@@ -1,6 +1,4 @@
-// const mainAdmin = require('../middleware/mainAdmin')
-// const admin = require('../middleware/admin')
-// const auth = require('../middleware/auth')
+
 const _ = require('lodash')
 const { Contact, validate,validateEmail } = require('../models/contact')
 const express = require('express');
@@ -11,9 +9,6 @@ router.post('/', async (req, res) => {
 
     const { error } = validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
- 
-
- 
 
     const contact = new Contact(req.body)
     await contact.save()
