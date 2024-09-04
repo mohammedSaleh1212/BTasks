@@ -46,14 +46,15 @@ const contactSchema = new mongoose.Schema({
 
 
 const Contact = mongoose.model('Contact', contactSchema)
+
 function validateContact(user) {
     const schema = Joi.object({
         name: Joi.string().min(2).max(30).trim().required(),
         email: Joi.string().min(5).max(255).email().trim().required().custom((value, helpers) => {
-            const allowedDomains = ['gmail.com', 'outlook.com','yahoo.com','icloud.com','hotmail.com'];
-            const domain = value.split('@')[1];
+            const allowedDomains = ['gmail.com', 'outlook.com','yahoo.com','icloud.com','hotmail.com']
+            const domain = value.split('@')[1]
             if (!allowedDomains.includes(domain)) {
-                return helpers.error('any.invalid');
+                return helpers.error('any.invalid')
             }
             return value;
         }),
